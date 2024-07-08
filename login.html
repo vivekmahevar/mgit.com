@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mg.ac.in - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .container h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container input[type="text"], .container input[type="password"] {
+            width: calc(100% - 22px);
+            /* Adjusted width to account for padding */
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensures padding is included in width */
+        }
+        .container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Replace these with actual usernames and passwords
+            const users = {
+                'parent1': { password: 'parentpass1', role: 'parent' },
+                'teacher1': { password: 'teacherpass1', role: 'teacher' },
+                'admin1': { password: 'adminpass1', role: 'admin' }
+            };
+
+            // Check if the entered username exists in the users object
+            if (users[username] && users[username].password === password) {
+                // Store the username and role in local storage
+                localStorage.setItem('loggedInUser', username);
+                localStorage.setItem('userRole', users[username].role);
+                // Redirect based on user role
+                redirectToDashboard(users[username].role);
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+
+        function redirectToDashboard(role) {
+            switch(role) {
+                case 'parent':
+                    window.location.href = 'file:///C:/Users/vivek/OneDrive/Pictures/Student%20magament%20system/parent/parentdash.html'; // Replace with actual URL
+                    break;
+                case 'teacher':
+                    window.location.href = 'file:///C:/Users/vivek/OneDrive/Pictures/Student%20magament%20system/teacher/teacherdash.html'; // Replace with actual URL
+                    break;
+                case 'admin':
+                    window.location.href = 'file:///C:/Users/vivek/OneDrive/Pictures/Student%20magament%20system/admin/admindash.html'; // Replace with actual URL
+                    break;
+                default:
+                    alert('Unknown user role');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form onsubmit="handleLogin(event)">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <br> <!-- Added line break for spacing -->
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <br> <!-- Added line break for spacing -->
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
